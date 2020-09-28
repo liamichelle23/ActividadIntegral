@@ -1,3 +1,4 @@
+fecha,   hora, ipfuente, puertofuente,hostnamefuente, ipdestino, puertodestino, hostnamedestino  
 10-8-2020,9:0:0,-,68,jonathan.reto.com,10.105.56.183,67,-
 10-8-2020,9:0:11,10.105.56.18,39805,jonathan.reto.com,4.4.4.4,53,-
 10-8-2020,9:0:19,10.105.56.18,32815,jonathan.reto.com,183.149.77.206,443,tripadvisor.com

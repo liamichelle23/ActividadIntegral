@@ -1,96 +1,21 @@
 /*Equipo 1
 Lia Michelle Nuñez
 Ana Sofia Rojas Rodriguez
- */
+*/
 #include <iostream>
 #include <vector>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include "registro.h"
-#include "busqueda.h"
-
 using namespace std;
-
-
-bool compare(Registro &r1, Registro &r2)
-{
-    // en proceso 
-
-};
-
-void mergeSort(vector<Registro> &arr, int primero, int ultimo)
-{
-    int medio;
-    int size = arr.size();
-    if(primero < ultimo) 
-    {
-      int medio = primero+(ultimo-primero)/2;
-      // Se hacen las llamadas recursivas con el vector dividido
-      mergeSort(arr, primero, medio);
-      mergeSort(arr, medio+1, ultimo);
-
-      int i, j, k, nl, nr;
-      int size = arr.size();
-
-      //size of left and right sub-arrays
-      nl = medio - primero + 1;
-      nr = ultimo - medio;
-      vector<Registro> larr, rarr;
-
-      // Para rellenar los sub vectores de la izquierda y derecha
-      for(i = 0; i<nl; i++)
-      {
-        larr.push_back(arr[primero+i]);
-      }
-
-      for(j = 0; j<nr; j++)
-      {
-        rarr.push_back(arr[medio + 1 + j]);
-      }
-
-      i = 0; j = 0; k = primero;
-      // Para hacer el merge de vectorel temporales con un vector real
-      while(i < nl && j < nr) 
-      {
-         if(compare(larr[i], rarr[j])) 
-         {   //    (compare(entrada, entrada)) larr[i] >= rarr[j]
-            arr[k] = larr[i];
-            i++;
-         }
-         else
-         {
-            arr[k] = rarr[j];
-            j++;
-         }
-
-         k++;
-      }
-
-      while(i<nl) 
-      { // Para elemento extra en arreglo izquierdo
-        arr[k] = larr[i];
-        i++; k++;
-      }
-
-      while(j<nr) // Para elemento extra en arreglo derecho
-      {
-        arr[k] = rarr[j];
-        j++; k++;
-      }
-  
-   }
-   
-
-};
-
-
-
 
 
 int main()
 {
-  string fecha, hora , ipfuente, puertofuente, hostnamefuente, ipdestino, puertodestino, hostnamedestino;
+  string fecha, hora , ipfuente, hostnamefuente, ipdestino, hostnamedestino;
+  int puertofuente, puertodestino;
+
   stringstream s;
   vector<Registro> registros; //Declaracion del vector
   ifstream datos_csv("equipo1.csv");
@@ -99,13 +24,17 @@ int main()
   //Registro r;
   string line, dato, todo;
   int renglon;
+
   
-  while(getline(datos_csv,line)){
+  while(getline(datos_csv,line))
+  {
   Registro r;
   stringstream s(line);
   renglon=0;
+  
 
-  while(getline(s,dato,coma)){
+  while(getline(s,dato,coma))
+  {
   
   if(renglon==0)
   {
@@ -146,7 +75,7 @@ int main()
     r.hostnameDestino=dato;
   }
   else{
-      cout << "Error" << endl;
+      cout << "Error de apertura del archivo" << endl;
   }
   renglon ++;
   }
@@ -154,11 +83,51 @@ int main()
   registros.push_back(r);
   }
 
-  //Se imprime el vector
-  for(size_t i=0; i<registros.size(); i++){
+  /*for(size_t i=0; i<registros.size(); i++)
+  {
     registros[i].imprimirValores(registros[i]);
-  }
+  }*/
+
+  cout<<"Numero de registros es de: "<<registros.size()<<endl; //Cuantos registros ahi
+  
+  
+  Busqueda <Registro> b;
+
+  //pregunta 3
+  cout<<"La cantidad de registros de la segunda fecha es : "<<b.BusquedaSecuencial(registros,"11-8-2020")<<endl;
+
+  //pregunta 4
+  cout<<"Computadora de Jeffrey : "<<b.BusquedaSecuencial_2(registros,"jeffrey.reto.com")<<endl;
+  cout<<"Computadora de Betty : "<<b.BusquedaSecuencial_2(registros,"betty.reto.com")<<endl;
+  cout<<"Computadora de Katherine : "<<b.BusquedaSecuencial_2(registros,"katherine.reto.com")<<endl;
+  cout<<"Computadora de Scott : "<<b.BusquedaSecuencial_2(registros,"scott.reto.com")<<endl;
+  cout<<"Computadora de Benjamin : "<<b.BusquedaSecuencial_2(registros,"benjamin.reto.com")<<endl;
+  cout<<"Computadora de Samuel : "<<b.BusquedaSecuencial_2(registros,"samuel.reto.com")<<endl;
+  cout<<"Computadora de Raymond : "<<b.BusquedaSecuencial_2(registros,"raymond.reto.com")<<endl;
+
+  //pregunta 6
+  cout<<"Computadora de Server: "<<b.BusquedaSecuencial_2(registros,"server.reto.com")<<endl;
+
+  //pregunta 7
+  b.BusquedaSecuencial_3(registros,"34.107.163.25");
+  b.BusquedaSecuencial_3(registros,"10.105.56.183");
+  b.BusquedaSecuencial_3(registros,"72.71.117.167");
+  b.BusquedaSecuencial_3(registros,"4.4.4.4");
+  b.BusquedaSecuencial_3(registros,"183.149.77.206");
+  b.BusquedaSecuencial_3(registros,"103.164.80.217");
+    
+    
+ 
+  
+
+
+
+
+
+
+
 
   
 
+  
 }
