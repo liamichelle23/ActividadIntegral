@@ -1,0 +1,150 @@
+/*Equipo 1
+Lia Michelle Nuñez
+Ana Sofia Rojas Rodriguez
+*/
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include "registro.h"
+using namespace std;
+
+template<typename T>
+void Imprimirvector(vector<T> arr, int n)
+{
+  for(size_t i=0; i<arr.size(); i++)
+  {
+    arr[i].imprimirValores(arr[i]);
+  }
+   
+
+}
+
+int main()
+{
+  string fecha, hora , ipfuente, hostnamefuente, ipdestino, hostnamedestino;
+  int puertofuente, puertodestino;
+
+  stringstream s;
+  vector<Registro> registros; //Declaracion del vector
+  ifstream datos_csv("equipo1.csv");
+  char coma=  ',';
+
+  //Registro r;
+  string line, dato, todo;
+  int renglon;
+
+  
+  while(getline(datos_csv,line))
+  {
+  Registro r;
+  stringstream s(line);
+  renglon=0;
+  
+
+  while(getline(s,dato,coma))
+  {
+  
+  if(renglon==0)
+  {
+    r.fecha=dato;
+  }
+  else if(renglon==1)
+  {
+    r.hora=dato;
+  }
+
+  else if(renglon==2)
+  {
+    r.ipFuente=dato;
+  }
+
+  else if(renglon==3)
+  {
+      r.puertoFuente=dato;
+  }
+
+  else if(renglon==4)
+  {
+    r.hostnameFuente=dato;
+  }
+
+  else if(renglon==5)
+  {
+    r.ipDestino=dato;
+  }
+
+  else if(renglon==6)
+  {
+    r.puertoDestino=dato;
+  }
+
+  else if(renglon==7)
+  {
+    r.hostnameDestino=dato;
+  }
+  else{
+      cout << "Error de apertura del archivo" << endl;
+  }
+  renglon ++;
+  }
+
+  registros.push_back(r);
+  }
+
+  /*for(size_t i=0; i<registros.size(); i++)
+  {
+    registros[i].imprimirValores(registros[i]);
+  }*/
+
+
+  //pregunta 2
+  cout<<"Numero de registros es de: "<<registros.size()<<endl; 
+  cout<<endl;
+  
+
+  Busqueda <Registro> b;
+
+  //pregunta 3
+  cout<<"La cantidad de registros de la segunda fecha es : "<<b.BusquedaSecuencial(registros,"11-8-2020")<<endl;
+  cout<<endl;
+
+  //pregunta 4
+  cout<<"Computadora de Jeffrey : "<<b.BusquedaSecuencial_2(registros,"jeffrey.reto.com")<<endl;
+  cout<<"Computadora de Betty : "<<b.BusquedaSecuencial_2(registros,"betty.reto.com")<<endl;
+  cout<<"Computadora de Katherine : "<<b.BusquedaSecuencial_2(registros,"katherine.reto.com")<<endl;
+  cout<<"Computadora de Scott : "<<b.BusquedaSecuencial_2(registros,"scott.reto.com")<<endl;
+  cout<<"Computadora de Benjamin : "<<b.BusquedaSecuencial_2(registros,"benjamin.reto.com")<<endl;
+  cout<<"Computadora de Samuel : "<<b.BusquedaSecuencial_2(registros,"samuel.reto.com")<<endl;
+  cout<<"Computadora de Raymond : "<<b.BusquedaSecuencial_2(registros,"raymond.reto.com")<<endl;
+  cout<<endl;
+
+   //5
+  b.BusquedaSecuencial_4(registros,"-");
+
+
+  //pregunta 6
+  cout<<"Computadora de Server: "<<b.BusquedaSecuencial_2(registros,"server.reto.com")<<endl;
+  cout<<endl;
+  
+  //pregunta 7
+  b.BusquedaSecuencial_3(registros,"34.107.163.25");
+  b.BusquedaSecuencial_3(registros,"10.105.56.183");
+  b.BusquedaSecuencial_3(registros,"72.71.117.167");
+  b.BusquedaSecuencial_3(registros,"4.4.4.4");
+  b.BusquedaSecuencial_3(registros,"183.149.77.206");
+  b.BusquedaSecuencial_3(registros,"103.164.80.217");
+
+  cout<<"El mail de la compañia es: "<<gethostnamedestino(registros[6]);
+
+  //8
+  changepd(registros);
+  
+  /*Quicksort<Registro> q;
+  q.quicksort(registros,0,registros.size()-1);
+  vector<Registro> arr_2(registros);
+  Imprimirvector(arr_2,arr_2.size());*/
+  
+  
+}
