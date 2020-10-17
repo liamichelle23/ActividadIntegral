@@ -1,3 +1,9 @@
+/*
+Clase que obtiene los datos de nuestro archivo .csv. Para poder llevar a cabo despues en el main un vector de estos.
+También cuenta con un ordenamiento sorter y busqueda Secuencial para después poder contestar las preguntas del reto 1.
+*/
+
+
 #ifndef _registro_
 #define _registro_
 #include <fstream>
@@ -20,7 +26,7 @@ class Registro
     string hostnameDestino;
     
     Registro()=default;
-    Registro(string fecha_, string hora_, string ipFuente_, int puertoFuente_, string hostnameFuente_, string ipDestino_, int puertoDestino_,string hostnameDestino_)
+    Registro(string fecha_, string hora_, string ipFuente_, string puertoFuente_, string hostnameFuente_, string ipDestino_, string puertoDestino_,string hostnameDestino_)
     {
         fecha=fecha_;
         hora=hora_;
@@ -34,6 +40,39 @@ class Registro
     };
     ~Registro(){};
 
+    string getIPFuente()
+    {
+        return ipFuente;
+    };
+
+    string getPuertoFuente()
+    {
+        return puertoFuente;
+    };
+
+    string getHostnameFuente()
+    {
+        return hostnameFuente;
+    };
+
+    string getIPDestino()
+    {
+        return ipDestino;
+    };
+
+    string getPuertoDestino()
+    {
+        return puertoDestino;
+    };
+
+    string getHostnameDestino()
+    {
+        return hostnameDestino;
+    };
+
+
+
+
     void imprimirValores(Registro reg)
     {
         cout << fecha << ", " << hora << ", " << ipFuente << ", " << puertoFuente << ", " << hostnameFuente << ", " << ipDestino << ", " << puertoDestino << ", " << hostnameDestino << endl;
@@ -42,7 +81,6 @@ class Registro
 
 
 };
-
 
 template <typename T>
 class Sorter
