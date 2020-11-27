@@ -31,11 +31,9 @@ Cabe mencionar que un conjunto es una colección de elemento ÚNICOS.
 #include<vector>
 #include <stddef.h>
 #include <iostream>
-#include <queue>
-#include <stack> 
 using namespace std;
 
-
+template <class T>
 class Registro
 {
     
@@ -60,6 +58,11 @@ class Registro
 
     };
     ~Registro(){};
+
+    string getfecha()
+    {
+        return fecha;
+    };
 
     string getIPFuente()
     {
@@ -91,6 +94,27 @@ class Registro
         return hostnameDestino;
     };
 
+    string nameSeqSearch(vector<T> arr, string a)
+        {
+            string idfk;
+            for (size_t i = 0; i < arr.size(); i++)
+            {
+                bool rito = compName(arr[i], a);
+                if (rito == true)
+                {
+                    idfk = "Found";
+                    return idfk;
+                }
+                
+            }
+            idfk = "Not found";
+            return idfk; 
+        }
+    bool compName(Registro &a, string name)
+        {
+            return a.hostF == name;
+        }
+
 
 
 
@@ -102,20 +126,35 @@ class Registro
 
 
 };
+class Conexion{
+    public:
+        string fecha;
+        string ip;
+        string puerto;
+        Conexion(string fecha_, string ip_, string puerto_){
+            fecha=fecha_;
+            ip=ip_;
+            puerto=puerto_;
+        };
+
+};
 
 class ConexionComputadora
 {
     private:
     string ip;
     string nombre;
-    stack<string> conexionEntrante; //pilas
-    queue<string> conexionSaliente; //colas o filas
+    vector<Conexion> conexionEntrante; //pilas
+    vector<Conexion> conexionSaliente; //colas o filas
 
     public:
     ConexionComputadora()=default;
 
-
-    ConexionComputadora(string _ip,string _nombre, stack <string> _conexionEntrante, queue <string> _conexionSaliente)
+    ConexionComputadora(string ip_, string nombre_){
+        ip=ip_; 
+        nombre=nombre_;
+    }
+    ConexionComputadora(string _ip,string _nombre, vector <Conexion> _conexionEntrante, vector <Conexion> _conexionSaliente)
     {
         ip=_ip;
         nombre=_nombre;
@@ -136,20 +175,30 @@ class ConexionComputadora
         return nombre;
     }
 
-    stack<string> getConexionEntrante()
+    vector<Conexion> getConexionEntrante()
     {
         return conexionEntrante;
     }
 
-    queue<string> getConexionSaliente()
+    vector<Conexion> getConexionSaliente()
     {
         return conexionSaliente;
     }
     
+    void insertarConexionSaliente(string ip, string fecha, string puerto){
+        Conexion c(ip, fecha, puerto);
+        conexionSaliente.push_back(c);
+    }
 
-
+    void insertarConexionEntrante(string ip, string fecha, string puerto){
+        Conexion c(ip, fecha, puerto);
+        conexionEntrante.push_back(c);
+    }
 
 
 };
+
+
+
 
 #endif
